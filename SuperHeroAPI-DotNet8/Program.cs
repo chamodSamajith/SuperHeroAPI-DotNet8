@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SuperHeroAPI_DotNet8.Data;
+using SuperHeroAPI_DotNet8.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// Register ISuperHeroService with its implementation SuperHeroService
+builder.Services.AddScoped<ISuperHeroService, SuperHeroService>();
 
 var app = builder.Build();
 
